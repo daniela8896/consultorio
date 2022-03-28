@@ -118,43 +118,39 @@ $listaCitas = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                     <input type="date" required class="form-control" value="<?php echo $txtFecha; ?>" name="txtFecha" id="txtFecha" placeholder="Fecha de la cita">
 
                 </div>
-
-                <select class="form-control mb-5">
-                    <option value="<?php echo $fecha; ?>" name="fecha">Seleccione una fecha:</option>
+                <!--asi se crea un select-->
+                <!-- <select class="form-control mb-5">
+                    <option value="<?php //echo $fecha; 
+                                    ?>" name="fecha">Seleccione una fecha:</option>
                     <?php
-                    $query = $conexion->prepare("SELECT * FROM fechas");
-                    $query->execute();
-                    $data = $query->fetchAll();
+                    // $query = $conexion->prepare("SELECT * FROM fechas");
+                    // $query->execute();
+                    // $data = $query->fetchAll();
 
-                    foreach ($data as $valores) :
-                        echo '<option value="' . $valores["id"] . '">' . $valores["fecha"] . '</option>';
-                    endforeach;
+                    // foreach ($data as $valores) :
+                    //     echo '<option value="' . $valores["id"] . '">' . $valores["fecha"] . '</option>';
+                    // endforeach;
                     ?>
-                </select>
+                </select> -->
 
-                <select class="form-control mb-5">
-                    <option value="<?php echo $fecha; ?>" name="fecha">Seleccione una hora:</option>
+                <!--asi se crea un select-->
+                <!-- <select class="form-control mb-5">
+                    <option value="<?php //echo $fecha; 
+                                    ?>" name="fecha">Seleccione una hora:</option>
                     <?php
-                    $query = $conexion->prepare("SELECT * FROM horas");
-                    $query->execute();
-                    $datosHoras = $query->fetchAll();
+                    // $query = $conexion->prepare("SELECT * FROM horas");
+                    // $query->execute();
+                    // $datosHoras = $query->fetchAll();
 
-                    foreach ($datosHoras as $datoHora) :
-                        echo '<option value="' . $datoHora["id"] . '">' . $datoHora["nombre"] . '</option>';
-                    endforeach;
+                    // foreach ($datosHoras as $datoHora) :
+                    //     echo '<option value="' . $datoHora["id"] . '">' . $datoHora["nombre"] . '</option>';
+                    // endforeach;
                     ?>
-                </select>
+                </select> -->
 
 
-
-
-
-
-
-
-
-                <div class="btn-group" role="group" aria-label="">
-                    <button type="submit" name="accion" <?php echo ($accion == "Seleccionar") ? "Disabled" : ""; ?> value="agregar" class="btn btn-success">Agregar</button>
+                <div class="btn-group d-flex justify-content-around" role="group" aria-label="">
+                    <button type="submit" name="accion" <?php echo ($accion == "Seleccionar") ? "Disabled" : ""; ?> value="agregar" class="btn btn-success ">Agregar</button>
                     <button type="submit" name="accion" <?php echo ($accion != "Seleccionar") ? "Disabled" : ""; ?> value="modificar" class="btn btn-warning">Modificar</button>
                     <button type="submit" name="accion" <?php echo ($accion != "Seleccionar") ? "Disabled" : ""; ?> value="cancelar" class="btn btn-info">Cancelar</button>
                 </div>
@@ -168,49 +164,54 @@ $listaCitas = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 </div>
 <div class="container">
 
-<div class="row">
-
-<div class="col-md-12">
-
-    <table class="table table-bordered ">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Tema</th>
-                <th>Fecha</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            foreach ($listaCitas as $cita) { ?>
-                <tr class="">
-                    <td class=""><?php echo $cita['id']; ?></td>
-                    <td class=""><?php echo $cita['nombre']; ?></td>
-                    <td class="w-25"><?php echo $cita['tema']; ?></td>
-                    <td class=""><?php echo $cita['fecha']; ?></td>
-            
-                    <td class="w-50">
-                        <form method="post" class="d-flex justify-content-around align-content-center">
-    
-                            <input type="hidden" name="txtID" id="txtID" value="<?php echo $cita['id']; ?>" />
-                            <input type="submit" name="accion" value="Seleccionar" class="btn btn-primary mb-3 " />
-                            <input type="submit" name="accion" value="Borrar" class="btn btn-danger" />
-    
-    
-                        </form>
-    
-                    </td>
-                </tr>
-            <?php  } ?>
-    
-        </tbody>
-    </table>
-</div>
+    <div class="row w-100">
+        <div class="d-flex align-items-center justify-content-center w-100 mt-5 mb-5">
+            <h2 class="text-center">Estas son tus citas reservadas</h2>
+        </div>
 
 
-    
+        <div class="col w-100">
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Tema</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($listaCitas as $cita) { ?>
+                        <tr class="">
+                            <td class=""><?php echo $cita['id']; ?></td>
+                            <td class=""><?php echo $cita['nombre']; ?></td>
+                            <td class="w-25"><?php echo $cita['tema']; ?></td>
+                            <td class=""><?php echo $cita['fecha']; ?></td>
+
+                            <td class="">
+
+                                <form method="post" class="d-flex justify-content-center gap-3">
+
+                                    <input type="hidden" name="txtID" id="txtID" value="<?php echo $cita['id']; ?>" />
+                                    <input type="submit" name="accion" value="Seleccionar" class="btn btn-primary " />
+                                    <input type="submit" name="accion" value="Borrar" class="btn btn-danger" />
+
+
+                                </form>
+
+                            </td>
+                        </tr>
+                    <?php  } ?>
+
+                </tbody>
+            </table>
+        </div>
+
+
+
     </div>
 </div>
 
